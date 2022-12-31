@@ -1,8 +1,8 @@
-# Fabric Example Mod
+# Fabric Serverside Item Kill Tracker
 
-## Setup
+Entirely server sided plugin that tracks kills from items and appends it to the item's lore description.
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
+![image](image.png)
 
 ## License
 
