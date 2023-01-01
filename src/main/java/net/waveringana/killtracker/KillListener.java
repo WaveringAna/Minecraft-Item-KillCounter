@@ -12,7 +12,7 @@ public class KillListener implements AfterDeath {
     @Override
     public void afterDeath(LivingEntity entity, DamageSource damageSource) {
         if (damageSource.getAttacker() instanceof ServerPlayerEntity) {
-            KillTracker.LOGGER.info( String.format("Player %s killed %b", damageSource.getAttacker().getEntityName(), entity));
+            KillTracker.LOGGER.info( String.format("Player %s killed %s", damageSource.getAttacker().getEntityName(), entity.getType()));
             ItemStack weapon = ((ServerPlayerEntity) damageSource.getAttacker()).getMainHandStack();
             NbtCompound nbt = weapon.getOrCreateNbt();
 
@@ -36,13 +36,13 @@ public class KillListener implements AfterDeath {
             NbtCompound nbt = weapon.getNbt();
             int killcount = nbt.getInt("Kill Count");
 
-            NbtCompound display = new NbtCompound();
-            NbtList lore = new NbtList();
+            NbtCompound display = weapon.getSubNbt("display") != null ? weapon.getSubNbt("display") : new NbtCompound();            NbtList lore = new NbtList();
             NbtCompound rawJson = new NbtCompound();
 
             rawJson.putString("killcount",  String.format ("{\"text\": \"StatTrak Kill Count: %s\" }", killcount));
             lore.add(rawJson.get("killcount"));
             display.put("Lore", lore);
+            KillTracker.LOGGER.info(display.toString());
 
             nbt.put("display", display);
 
