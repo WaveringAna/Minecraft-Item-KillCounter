@@ -1,6 +1,6 @@
-# Fabric Serverside Item Kill Tracker
+# Fabric Serverside Item Stats Tracker
 
-Entirely server sided plugin that tracks kills from items and appends it to the item's lore description.
+Entirely server sided plugin that tracks stats like kills and blocks mined from items and appends it to the item's lore description.
 
 ![image](image.png)
 

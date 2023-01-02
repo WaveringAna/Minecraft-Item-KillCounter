@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "id": "killtracker",
-  "version": "0.0.0",
+  "id": "stattrakcounter",
+  "version": "0.1.0",
 
-  "name": "Fabric Serverside Item Kill Tracker",
-  "description": "Entirely server sided plugin that tracks kills from items and appends it to the item's lore description.",
+  "name": "Fabric Serverside Item Stats Tracker",
+  "description": "Entirely server sided plugin that tracks stats such as kills gained or blocks mined from items and appends it to the item's lore description.",
   "authors": [
     "Me!"
   ],
@@ -19,11 +19,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.waveringana.killtracker.KillTracker"
+      "net.waveringana.stattrakcounter.StatTrakCounter"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
   ],
 
   "depends": {
