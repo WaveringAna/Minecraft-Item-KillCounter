@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "stattrakcounter",
-  "version": "0.1.0",
+  "version": "0.1.1",
 
   "name": "Fabric Serverside Item Stats Tracker",
   "description": "Entirely server sided plugin that tracks stats such as kills gained or blocks mined from items and appends it to the item's lore description.",
