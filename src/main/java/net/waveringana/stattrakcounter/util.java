@@ -13,19 +13,26 @@ public class util {
         return String.format("{\"text\": \"%s: %s\" }", tagName, count);
     }
 
+    public static void incrementCount(ItemStack item, PlayerEntity player, String countType, String displayName) {
+        NbtCompound nbt = item.getOrCreateNbt();
+        int count = 1;
+        if (nbt.contains(countType)) {
+            count = item.getNbt().getInt(countType);
+            count++;
+        }
+        nbt.putInt(countType, count);
+        item.setNbt(nbt);
+        util.addCounter(item, player, countType, displayName);
+    }
+
     public static void addCounter(ItemStack item, PlayerEntity player, String nbttag, String tag) {
         NbtCompound nbt = item.getNbt();
         int killCount = nbt.getInt("Kill Count");
         int mineCount = nbt.getInt("Mined Count");
-        //int counter = nbt.getInt(nbttag);
 
-        NbtCompound display = item.getSubNbt("display");
+        NbtCompound display = item.getOrCreateSubNbt("display");
         NbtCompound rawJSON = new NbtCompound();
         NbtList lore = new NbtList();
-
-        if (display == null) {
-            display = new NbtCompound();
-        }
 
         Map<String, String> tagMap = new LinkedHashMap<>();
 

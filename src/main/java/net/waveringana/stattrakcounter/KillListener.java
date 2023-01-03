@@ -4,8 +4,11 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents.AfterDea
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.item.BowItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.item.SwordItem;
+import net.minecraft.item.ToolItem;
 
 public class KillListener 
 implements AfterDeath {
@@ -15,21 +18,12 @@ implements AfterDeath {
             return;
         }
         
-        StatTrakCounter.LOGGER.info( String.format("Player %s killed %s", damageSource.getAttacker().getEntityName(), entity.getType()));
-        ItemStack weapon = ((ServerPlayerEntity) damageSource.getAttacker()).getMainHandStack();
-        NbtCompound nbt = weapon.getOrCreateNbt();
+        ServerPlayerEntity player = (ServerPlayerEntity) damageSource.getAttacker();
+        ItemStack itemStack = player.getMainHandStack();
+        Item item = itemStack.getItem();
 
-        int killcount = 1;
-
-        if (nbt.contains("Kill Count")) {
-            killcount = weapon.getNbt().getInt("Kill Count");
-            killcount++;
-            nbt.putInt("Kill Count", killcount);
-        } else {
-            nbt.putInt("Kill Count", killcount);
+        if (item instanceof ToolItem || item instanceof SwordItem || item instanceof BowItem) {
+		    util.incrementCount(player.getMainHandStack(), player, "Kill Count", "StatTrak Kill Count");
         }
-
-        weapon.setNbt(nbt);
-        util.addCounter(weapon, (ServerPlayerEntity) damageSource.getAttacker(), "Kill Count", "StatTrak Kill Count");
     }
 }
